@@ -3,20 +3,24 @@ include "DB.php";
 
 $db = new DB();
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $Id_No          =       $_POST         ['Id_No']; 
-        $Last_Name      =       $_POST     ['Last_Name']; 
-        $First_Name     =       $_POST    ['First_Name']; 
-        $Age            =       $_POST           ['Age']; 
-        $Course         =       $_POST        ['Course']; 
-        $Address        =       $_POST       ['Address']; 
+    $student = new Student(
+        
+        $_POST      ['Id_No'], 
+        $_POST      ['Last_Name'], 
+        $_POST      ['First_Name'], 
+        $_POST      ['Age'], 
+        $_POST      ['Course'], 
+        $_POST      ['Address']
+    );
 
-        $db->insert($Id_No, $Last_Name, $First_Name, $Age, $Course, $Address);
+    $db = new DB();
+    $db->insert($student);
 
-        header("Location: index.php");
-        exit();
-    }
+    header("Location: index.php");
+    exit();
+}
     
 ?>
 
